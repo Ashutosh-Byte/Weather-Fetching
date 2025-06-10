@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather api</title>
+    <style>
+      body {
+        min-height: 100vh;
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .container {
+        background: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(8px);
+        border-radius: 20px;
+        padding: 40px 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 320px;
+      }
+      .CityName {
+        padding: 10px 15px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 1rem;
+        margin-bottom: 18px;
+        width: 200px;
+        background: rgba(255, 255, 255, 0.7);
+        color: #333;
+        transition: box-shadow 0.2s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+      }
+      .CityName:focus {
+        box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
+      }
+      .Search {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 30px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+        transition: background 0.2s, transform 0.1s;
+      }
+      .Search:hover {
+        background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+        transform: translateY(-2px) scale(1.03);
+      }
+      .Data {
+        color: #fff;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        margin: 10px 0;
+        text-align: center;
+      }
+      .cityname {
+        font-size: 1.3rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+      .citytemp {
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+      .cityzone {
+        font-size: 1rem;
+        opacity: 0.85;
+      }
+      .currentlocation {
+        background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 30px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        margin-bottom: 15px;
+        margin-top: 5px;
+        box-shadow: 0 2px 8px rgba(67, 206, 162, 0.15);
+        transition: background 0.2s, transform 0.1s, box-shadow 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .currentlocation:hover {
+        background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 4px 16px rgba(67, 206, 162, 0.25);
+      }
+
+      .currentlocation:active {
+        transform: scale(0.97);
+        box-shadow: 0 1px 4px rgba(67, 206, 162, 0.1);
+      }
+
+      /* Optional: Pulse animation on click */
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(67, 206, 162, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(67, 206, 162, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(67, 206, 162, 0);
+        }
+      }
+      .currentlocation.pulse {
+        animation: pulse 0.5s;
+      }
+      @keyframes fadeSlideIn {
+        0% {
+          opacity: 0;
+          transform: translateY(30px) scale(0.96);
+        }
+        60% {
+          opacity: 1;
+          transform: translateY(-8px) scale(1.03);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .cityname,
+      .citytemp,
+      .cityzone {
+        opacity: 1;
+        transition: opacity 0.3s;
+      }
+
+      .animated {
+        animation: fadeSlideIn 0.7s cubic-bezier(0.4, 2, 0.6, 1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <input class="CityName" type="text" placeholder="Enter City here" />
+      <button class="currentlocation">Get your Current location</button>
+      <button class="Search">search</button>
+
+      <h4 class="Data cityname">City Name</h4>
+      <h5 class="Data citytemp">City Temp</h5>
+      <h6 class="Data cityzone">Time zone</h6>
+    </div>
+    <script src="Weather.js"></script>
+    <script>
+    // Animation function, but DO NOT call it here!
+    function animateWeatherData() {
+      const elements = [
+        document.querySelector('.cityname'),
+        document.querySelector('.citytemp'),
+        document.querySelector('.cityzone')
+      ];
+      elements.forEach(el => {
+        el.classList.remove('animated');
+        void el.offsetWidth; // force reflow to restart animation
+        el.classList.add('animated');
+      });
+    }
+  </script>
+  </body>
+</html>
